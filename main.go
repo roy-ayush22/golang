@@ -1,16 +1,23 @@
 package main
 
-import "fmt"
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strings"
+)
 
 func main() {
-	var name string
-	var age int
-	
+	reader := bufio.NewReader(os.Stdin)
+
 	fmt.Print("enter your name: ")
-	fmt.Scan(&name)
-	
-	fmt.Print("enter your age: ")
-	fmt.Scan(&age)
-	
-	fmt.Println("hello", name, "you are", age, "years old!")
+
+	name, err := reader.ReadString('\n')
+	if err != nil {
+		fmt.Println("error reading input:", err)
+		return
+	}
+
+	name = strings.TrimSpace(name)
+	fmt.Println("Hello", name)
 }
