@@ -5,8 +5,15 @@ import (
 	"math/rand"
 )
 
+type Game struct {
+	target  int
+	attempt int
+}
+
 func main() {
-	num := rand.Intn(101)
+	game := Game{
+		target: rand.Intn(101),
+	}
 
 	var guess int
 	fmt.Println("guess a number between 0 and 100.")
@@ -17,15 +24,17 @@ func main() {
 		if err != nil {
 			fmt.Println("invalid input! enter a valid integer", err)
 			continue
-
 		}
 
-		if guess < num {
+		game.attempt++
+
+		if guess < game.target {
 			fmt.Println("low!")
-		} else if guess > num {
+		} else if guess > game.target {
 			fmt.Println("high!")
 		} else {
-			fmt.Println("correct! the number was:", num)
+			fmt.Println("correct, the number was:", game.target)
+			fmt.Println("attempts:", game.attempt)
 			break
 		}
 	}
