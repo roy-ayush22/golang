@@ -18,7 +18,7 @@ func main() {
 	fmt.Println("4. delete contact")
 
 	for {
-		fmt.Println("enter command:")
+		fmt.Print("enter command:")
 		_, err := fmt.Scan(&input)
 		if err != nil {
 			fmt.Println("invalid error", err)
@@ -32,7 +32,7 @@ func main() {
 			fmt.Println("enter contact details:")
 			_, err := fmt.Scan(&name, &phone, &email)
 			if err != nil {
-				fmt.Println("invlaid input", err)
+				fmt.Println("invalid input", err)
 				continue
 			}
 			newContact := Contact{
@@ -43,10 +43,16 @@ func main() {
 			contacts = append(contacts, newContact)
 			fmt.Println("contact added successfully")
 			// code to append the data into the in-memory contacts
+
 		} else if input == 2 {
 			// code to display all contacts
+			for i, contact := range contacts {
+				fmt.Println(i, contact.Name, contact.Phone, contact.Email)
+			}
 		} else if input == 3 {
 			// search contact by name
+			fmt.Println("enter name to search:")
+			// var found string
 		} else if input == 4 {
 			// code to delete contact
 		} else {
