@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type Contact struct {
 	Name  string
@@ -25,11 +27,11 @@ func main() {
 			continue
 		}
 		if input == 1 {
-			// var addContact string
+			// code to append the data into the in-memory contacts
 			var name string
 			var phone string
 			var email string
-			fmt.Println("enter contact details:")
+			fmt.Println("enter contact details: [ex:name phone email]")
 			_, err := fmt.Scan(&name, &phone, &email)
 			if err != nil {
 				fmt.Println("invalid input", err)
@@ -42,7 +44,6 @@ func main() {
 			}
 			contacts = append(contacts, newContact)
 			fmt.Println("contact added successfully")
-			// code to append the data into the in-memory contacts
 
 		} else if input == 2 {
 			// code to display all contacts
@@ -51,10 +52,48 @@ func main() {
 			}
 		} else if input == 3 {
 			// search contact by name
-			fmt.Println("enter name to search:")
-			// var found string
+			var inputName string
+			found := false
+			fmt.Println("enter name to found: ")
+			_, err := fmt.Scan(&inputName)
+			if err != nil {
+				fmt.Println("invalid input", err)
+				continue
+			}
+			for _, contact := range contacts {
+				if contact.Name == inputName {
+					fmt.Println("match found:", contact)
+					found = true
+					break
+				}
+			}
+			if !found {
+				fmt.Println("contact not found")
+			}
+
 		} else if input == 4 {
 			// code to delete contact
+			var inputName string
+			fmt.Println("enter contact to delete: ")
+			found := false
+
+			_, err := fmt.Scan(&inputName)
+			if err != nil {
+				fmt.Println("invalid input", err)
+				continue
+			}
+			for i, contact := range contacts {
+				if contact.Name == inputName {
+					contacts = append(contacts[:i], contacts[i+1:]...)
+					fmt.Println("contact deleted")
+					found = true
+					break
+				}
+			}
+			if !found {
+				fmt.Println("contact not found")
+			}
+
 		} else {
 			// handle unvalid input
 		}
